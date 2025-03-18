@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nue.io Colombia Case Study</title>
+    <link rel="icon" type="image/svg+xml" href="Nue-logo.svg">
+    <link rel="shortcut icon" href="Nue-logo.svg" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nue: {
+                            purple: '#7F56FD',      // Primary purple
+                            blue: '#3B9BFF',        // Primary blue
+                            dark: '#000000',        // Dark text
+                            light: '#F8F9FF',       // Light background
+                            gray: '#4A5568'         // Text gray
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gradient-brand': 'linear-gradient(135deg, #7F56FD 0%, #3B9BFF 100%)',
+                        'gradient-light': 'linear-gradient(135deg, #F8F9FF 0%, #EDF2FF 100%)'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotateGradient {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes flowCircuit {
+            0% {
+                stroke-dashoffset: 1000;
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 0.2;
+            }
+        }
+
+        @keyframes glowPulse {
+            0% {
+                filter: drop-shadow(0 0 2px rgba(127, 86, 253, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 8px rgba(127, 86, 253, 0.5));
+            }
+            100% {
+                filter: drop-shadow(0 0 2px rgba(127, 86, 253, 0.3));
+            }
+        }
+
+        .title-container {
+            position: relative;
+            display: inline-block;
+            padding: 2rem;
+        }
+
+        .circuit-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .circuit-path {
+            fill: none;
+            stroke: url(#circuit-gradient);
+            stroke-width: 1;
+            stroke-dasharray: 1000;
+            opacity: 0.2;
+            animation: flowCircuit 8s linear infinite;
+        }
+
+        .title-text {
+            position: relative;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #7F56FD 0%, #3B9BFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cycle-indicator {
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 2px solid rgba(127, 86, 253, 0.1);
+            z-index: -1;
+        }
+
+        .cycle-indicator::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px solid rgba(59, 155, 255, 0.1);
+            animation: rotateGradient 20s linear infinite;
+        }
+
+        .revenue-cycle {
+            position: relative;
+            display: inline-block;
+        }
+
+        .revenue-cycle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(127, 86, 253, 0.1) 0%, rgba(59, 155, 255, 0.1) 100%);
+            transform: translate(-50%, -50%);
+            animation: rotateGradient 20s linear infinite;
+            z-index: -1;
+        }
+
+        .revenue-cycle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            border: 2px solid rgba(127, 86, 253, 0.1);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .cycle-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #7F56FD 0%, #3B9BFF 100%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            z-index: -1;
+        }
+
+        .particle-1 { animation: flowParticle 8s linear infinite; animation-delay: 0s; }
+        .particle-2 { animation: flowParticle 8s linear infinite; animation-delay: 2s; }
+        .particle-3 { animation: flowParticle 8s linear infinite; animation-delay: 4s; }
+        .particle-4 { animation: flowParticle 8s linear infinite; animation-delay: 6s; }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .section-fade {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .group:hover .group-hover\:translate-y-0 {
+            transform: translateY(0);
+        }
+        
+        .group:hover .group-hover\:opacity-100 {
+            opacity: 1;
+        }
+        
+        .group:hover .group-hover\:visible {
+            visibility: visible;
+        }
+
+        .toc-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 48;
+        }
+
+        .toc-button {
+            background: linear-gradient(135deg, #7F56FD 0%, #3B9BFF 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .toc-content {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(1rem);
+            transition: all 0.3s ease;
+            border: 2px solid #7F56FD;
+            scrollbar-width: thin;
+            scrollbar-color: #7F56FD transparent;
+        }
+
+        .toc-container:hover .toc-button {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .toc-container:hover .toc-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .toc-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .toc-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .toc-content::-webkit-scrollbar-thumb {
+            background-color: #7F56FD;
+            border-radius: 3px;
+        }
+
+        .toc-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 1rem;
+        }
+
+        .toc-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc-content a {
+            color: #4A5568;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .toc-content a:hover {
+            color: #7F56FD;
+            transform: translateX(4px);
+        }
+
+        .toc-footer {
+            border-top: 1px solid #7F56FD;
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: #7F56FD;
+            font-weight: 600;
+        }
+
+        .toc-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .toc-button:hover .toc-icon,
+        .toc-content:hover .toc-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Custom scrollbar styles */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Slider card hover effects */
+        .snap-center {
+            transition: all 0.3s ease;
+        }
+        
+        .snap-center:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(127, 86, 253, 0.1);
+        }
+        
+        /* Smooth snap scrolling */
+        .snap-x {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Card hover effects */
+        .hover\:scale-110:hover {
+            transform: scale(1.1);
+        }
+
+        /* Combined hover effects for cards */
+        .card-hover-effect {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover-effect:hover {
+            transform: scale(1.1) translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            z-index: 10;
+        }
+
+        @keyframes pulseNode {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        @keyframes flowConnection {
+            0% { stroke-dashoffset: 100; opacity: 0.1; }
+            50% { opacity: 0.3; }
+            100% { stroke-dashoffset: 0; opacity: 0.1; }
+        }
+
+        .client-network {
+            animation: float 20s infinite linear;
+        }
+
+        .client-node {
+            animation: pulseNode 4s infinite ease-in-out;
+        }
+
+        .connection-line {
+            stroke-dasharray: 100;
+            animation: flowConnection 8s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, 20px) rotate(0.5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        @keyframes pulseNode {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.8); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        @keyframes flowConnection {
+            0% { stroke-dashoffset: 100; opacity: 0.2; }
+            50% { opacity: 0.5; }
+            100% { stroke-dashoffset: 0; opacity: 0.2; }
+        }
+
+        .client-network {
+            animation: float 30s infinite linear;
+        }
+
+        .client-node {
+            animation: pulseNode 6s infinite ease-in-out;
+        }
+
+        .connection-line {
+            stroke-dasharray: 100;
+            animation: flowConnection 12s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-30px, 30px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+    </style>
+</head>
+<body class="bg-white text-nue-dark">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm z-50 py-4">
+        <div class="container mx-auto px-4 flex items-center">
+            <div class="w-1/3 flex justify-start">
+                <img src="Nue-logo.svg" alt="Nue.io" class="h-8">
+            </div>
+            <div class="w-1/3 flex justify-center">
+                <!-- Centered title with matching style from hero section -->
+                <span class="text-nue-purple font-semibold hidden md:block">CASE STUDY PRESENTATION</span>
+            </div>
+            <div class="w-1/3 flex justify-end">
+                <div class="relative group">
+                    <a href="https://www.linkedin.com/in/camilo-hernandez-viana-13975086/" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-3 bg-[#0A66C2] text-white px-4 py-2 rounded-full hover:opacity-90 transition-all duration-300 hover:gap-4">
+                        <div class="w-8 h-8 rounded-full overflow-hidden border-2 border-white">
+                            <img src="camiloprofile.jpeg" alt="Camilo Hernandez" class="w-full h-full object-cover">
+                        </div>
+                        <span class="font-semibold">Connect on LinkedIn</span>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    
+                    <!-- Expanded Bio Card -->
+                    <div class="absolute right-0 mt-2 w-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-[-10px]">
+                        <div class="bg-white rounded-xl shadow-xl p-6 border border-gray-100">
+                            <div class="flex items-start gap-4 mb-4">
+                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-nue-purple">
+                                    <img src="camiloprofile.jpeg" alt="Camilo Hernandez" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg text-nue-dark">Camilo Hernandez</h3>
+                                    <p class="text-nue-purple font-semibold">Country Manager @ Raincoat</p>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-sm text-nue-gray">
+                                <p class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-nue-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Seasoned operator with startup & enterprise experience
+                                </p>
+                                <p class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-nue-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Partner at Cobre & startup builder
+                                </p>
+                                <p class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-nue-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    Passionate about building & scaling teams
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-100">
+                                <p class="text-xs text-nue-gray italic">
+                                    "Building the future of revenue lifecycle management in LatAm"
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex items-center justify-center bg-gradient-light pt-20">
+        <div class="container mx-auto px-4 text-center">
+            <span class="text-nue-purple font-semibold mb-4 block animate-fade-in-up">CASE STUDY PRESENTATION</span>
+            <div class="title-container">
+                <!-- Circuit SVG Background -->
+                <svg class="circuit-background" viewBox="0 0 500 300">
+                    <defs>
+                        <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#7F56FD;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#3B9BFF;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path class="circuit-path" d="M50,150 C100,50 150,250 200,150 S300,50 350,150 S450,250 500,150" />
+                    <path class="circuit-path" d="M50,100 C150,50 200,200 300,100 S400,50 450,100" />
+                    <path class="circuit-path" d="M50,200 C150,150 200,250 300,200 S400,150 450,200" />
+                </svg>
+                
+                <div class="cycle-indicator"></div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up title-text">
+                    Revolutionizing the<br/>
+                    <span class="gradient-text">Quote-to-Revenue</span><br/>
+                    Journey with <span class="gradient-text">Nue.io</span>
+            </h1>
+            </div>
+            <p class="text-xl md:text-2xl mb-4 text-nue-gray animate-fade-in-up" style="animation-delay: 0.2s">
+                A comprehensive analysis of Nue.io's product strategy, customer expansion,<br/>
+                and talent acquisition approach
+            </p>
+            <p class="text-lg mb-8 text-nue-gray animate-fade-in-up" style="animation-delay: 0.3s">
+                Presented by Camilo Hernandez<br/>
+                <span class="text-nue-purple" id="current-date"></span>
+            </p>
+            <a href="#product-assessment" class="inline-block bg-gradient-brand text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity animate-fade-in-up" style="animation-delay: 0.4s">
+                Explore the Case Study
+            </a>
+        </div>
+    </header>
+
+    <!-- Product Assessment Section -->
+    <section id="product-assessment" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center space-x-3 justify-center mb-16">
+                <span class="text-4xl">📈</span>
+                <h2 class="text-4xl font-bold text-center text-nue-dark">Nue.io Product Assessment</h2>
+            </div>
+            
+            <!-- Step 1: Core Problem Statement -->
+            <div id="core-problem" class="w-full mx-auto mb-16 section-fade">
+                <h3 class="text-2xl font-semibold mb-6 gradient-text">A Revenue Cycle Problem</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- First Card (Previously Second) -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100 hover:shadow-2xl transition-all duration-500">
+                        <h4 class="text-xl font-semibold mb-6 text-nue-purple">🔎 Identifying the Core Problem</h4>
+                        <p class="text-lg mb-8 text-nue-gray">
+                            Today, traditional CPQ + Billing systems (requiring substantial resources and investment) are simply not keeping up with what modern businesses need. These tools are rigid, expensive, and holding GTM teams back. The move from standalone CPQ and billing systems to Revenue Lifecycle Management (RLM) is a fundamental shift in how businesses handle their revenue operations.
+                        </p>
+                        
+                        <!-- Enhanced Slider Container -->
+                        <div class="relative flex-1">
+                            <div class="overflow-x-hidden h-[220px]">
+                                <div class="flex transition-transform duration-300 ease-in-out h-full" id="slider-content">
+                                    <!-- Problem Cards -->
+                                    <div class="shrink-0 w-full bg-gradient-light rounded-xl p-8 border border-purple-100 flex flex-col h-full">
+                                        <h5 class="text-xl font-semibold mb-4">1️⃣ Fragmented Revenue Systems</h5>
+                                        <p class="text-lg text-nue-gray flex-1">Traditional CPQ and billing systems operate in silos, making it difficult for companies to get a unified view.</p>
+                                    </div>
+                                    
+                                    <div class="shrink-0 w-full bg-gradient-light rounded-xl p-8 border border-purple-100 flex flex-col h-full">
+                                        <h5 class="text-xl font-semibold mb-4">2️⃣ Inefficient Collaboration</h5>
+                                        <p class="text-lg text-nue-gray flex-1">Sales teams rely on CPQ tools, while finance teams work with billing platforms—creating delays and friction.</p>
+                                    </div>
+                                    
+                                    <div class="shrink-0 w-full bg-gradient-light rounded-xl p-8 border border-purple-100 flex flex-col h-full">
+                                        <h5 class="text-xl font-semibold mb-4">3️⃣ Hybrid Revenue Models</h5>
+                                        <p class="text-lg text-nue-gray flex-1">Companies today operate with a mix of subscriptions, consumption-based pricing, and credit-based models.</p>
+                                    </div>
+                                    
+                                    <div class="shrink-0 w-full bg-gradient-light rounded-xl p-8 border border-purple-100 flex flex-col h-full">
+                                        <h5 class="text-xl font-semibold mb-4">4️⃣ High Implementation Costs</h5>
+                                        <p class="text-lg text-nue-gray flex-1">Traditional CPQ solutions require heavy customization and engineering support.</p>
+                                    </div>
+                                    
+                                    <div class="shrink-0 w-full bg-gradient-light rounded-xl p-8 border border-purple-100 flex flex-col h-full">
+                                        <h5 class="text-xl font-semibold mb-4">5️⃣ Limited Multi-Channel</h5>
+                                        <p class="text-lg text-nue-gray flex-1">Salesforce CPQ was heavily optimized for direct sales, leaving gaps in partner and reseller strategies.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Navigation Dots -->
+                            <div class="absolute bottom-4 left-0 right-0">
+                                <div class="flex justify-center items-center gap-4">
+                                    <button class="w-3 h-3 rounded-full bg-nue-purple opacity-50 hover:opacity-100 transition-all duration-300 transform hover:scale-125 problem-dot active" data-index="0"></button>
+                                    <button class="w-3 h-3 rounded-full bg-nue-purple opacity-50 hover:opacity-100 transition-all duration-300 transform hover:scale-125 problem-dot" data-index="1"></button>
+                                    <button class="w-3 h-3 rounded-full bg-nue-purple opacity-50 hover:opacity-100 transition-all duration-300 transform hover:scale-125 problem-dot" data-index="2"></button>
+                                    <button class="w-3 h-3 rounded-full bg-nue-purple opacity-50 hover:opacity-100 transition-all duration-300 transform hover:scale-125 problem-dot" data-index="3"></button>
+                                    <button class="w-3 h-3 rounded-full bg-nue-purple opacity-50 hover:opacity-100 transition-all duration-300 transform hover:scale-125 problem-dot" data-index="4"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Card (Previously First) -->
+                    <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
+                        <h4 class="text-xl font-semibold mb-6 text-nue-purple">Define the Core Problem Statement</h4>
+                        <div class="flex flex-col h-full">
+                            <div class="flex-1">
+                                <p class="text-lg mb-8 text-nue-gray">
+                                    From the outset, Nue.io's vision has been to streamline the entire quote-to-revenue process—across all channels and all revenue models. This vision was seen as too big, too ambitious, with many assuming that incumbents like Salesforce CPQ, Zuora, and Oracle NetSuite already owned the space.
+                                </p>
+                                <div class="bg-gradient-light rounded-xl p-8 border border-purple-100">
+                                    <div class="flex items-center gap-6">
+                                        <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-nue-purple shadow-lg">
+                                            <img src="MarkwalkerCEO.jpeg" alt="Mark Walker" class="w-full h-full object-cover">
+                                        </div>
+                                        <div class="flex-1">
+                                            <blockquote class="text-lg font-medium text-nue-gray italic">
+                    "To bring quoting, self-service, usage rating and billing together in a single system that was beautifully and seamlessly integrated into Salesforce but that had the billing and omnichannel punch of true SaaS."
+                </blockquote>
+                                            <div class="mt-3 flex items-center gap-2">
+                                                <span class="text-nue-purple font-semibold">Mark Walker</span>
+                                                <span class="text-nue-gray">•</span>
+                                                <span class="text-nue-gray">CEO, Nue.io</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- How Nue.io Solves These Problems -->
+            <div id="nue-solution" class="w-full mx-auto mb-16 section-fade">
+                <h3 class="text-2xl font-semibold mb-6 gradient-text">How Nue.io Solves These Problems</h3>
+                <div class="flex flex-row gap-6 justify-between">
+                    <div class="p-6 rounded-lg bg-gradient-light w-1/3 min-h-[300px] flex flex-col card-hover-effect">
+                        <h4 class="text-xl font-semibold mb-4">✅ Unified Revenue Lifecycle Management</h4>
+                        <p>Unlike legacy CPQ and billing systems, Nue.io consolidates the entire revenue process in a single platform. Sales, Finance, and RevOps teams work from a single source of truth, eliminating discrepancies between quotes, invoices, and revenue recognition.</p>
+                </div>
+                    
+                    <div class="p-6 rounded-lg bg-gradient-light w-1/3 min-h-[300px] flex flex-col card-hover-effect">
+                        <h4 class="text-xl font-semibold mb-4">✅ Seamless Salesforce Integration</h4>
+                        <p>While most CPQ tools are built inside Salesforce, Nue.io was designed to work effortlessly within Salesforce while offering enterprise-grade billing capabilities.</p>
+                </div>
+                    
+                    <div class="p-6 rounded-lg bg-gradient-light w-1/3 min-h-[300px] flex flex-col card-hover-effect">
+                        <h4 class="text-xl font-semibold mb-4">✅ Built for Modern SaaS & Subscription Models</h4>
+                        <p>Nue.io is optimized for hybrid pricing, consumption-based billing, and automated revenue expansion workflows, ensuring companies can scale without system constraints.</p>
+                </div>
+                </div>
+            </div>
+
+            <!-- Platform Strengths -->
+            <div id="platform-strengths" class="w-full mx-auto mb-16 section-fade">
+                <h3 class="text-2xl font-semibold mb-6 gradient-text">🌟 Platform Strengths</h3>
+                <div class="flex flex-row gap-6 justify-between">
+                    <div class="p-6 rounded-lg bg-green-50 border border-green-100 w-1/4 min-h-[300px] flex flex-col card-hover-effect">
+                        <h4 class="text-xl font-semibold mb-4 text-green-600">✅ CPQ Excellence</h4>
+                        <p class="text-gray-700">Automates and optimizes the quoting process, enabling sales teams to generate accurate proposals quickly and reducing bottlenecks in deal execution.</p>
+                        </div>
+                    <div class="p-6 rounded-lg bg-green-50 border border-green-100 w-1/4 min-h-[300px] flex flex-col card-hover-effect">
+                        <h4 class="text-xl font-semibold mb-4 text-green-600">✅ Integrated Billing</h4>
+                        <p class="text-gray-700">A fully integrated billing system that ensures seamless invoicing, revenue recognition, and compliance with different pricing models.</p>
+                        </div>
+                    <div class="p-6 rounded-lg bg-green-50 border border-green-100 w-1/4 min-h-[300px] flex flex-col card-hover-effect">
+                        <h4 class="text-xl font-semibold mb-4 text-green-600">✅ Lifecycle Manager</h4>
+                        <p class="text-gray-700">Manages the entire customer journey from initial sale to renewal and expansion, ensuring revenue continuity and proactive engagement.</p>
+                    </div>
+                    <div class="p-6 rounded-lg bg-green-50 border border-green-100 w-1/4 min-h-[300px] flex flex-col card-hover-effect">
+                        <h4 class="text-xl font-semibold mb-4 text-green-600">✅ Revenue Intelligence</h4>
+                        <p class="text-gray-700">Provides deep insights into revenue performance, customer expansion opportunities, and financial forecasting for data-driven decisions.</p>
+                        </div>
+                </div>
+            </div>
+
+            <!-- Product Weaknesses -->
+            <div id="product-weaknesses" class="w-full mx-auto section-fade">
+                <h3 class="text-2xl font-semibold mb-6 gradient-text">Product Weaknesses</h3>
+                <div class="flex flex-row gap-6 justify-between">
+                    <div class="p-6 rounded-lg bg-red-50 border border-red-100 w-1/4 min-h-[300px] flex flex-col card-hover-effect">
+                        <h4 class="text-xl font-semibold mb-4 text-red-600">❌ Absence of AI</h4>
+                        <p class="text-gray-700">The lack of AI-driven automation, predictive analytics, and smart recommendations could become a competitive gap as more RevOps solutions leverage AI.</p>
+                    </div>
+                    <div class="p-6 rounded-lg bg-red-50 border border-red-100 w-1/4 min-h-[300px] flex flex-col card-hover-effect">
+                        <h4 class="text-xl font-semibold mb-4 text-red-600">❌ Native to Salesforce</h4>
+                        <p class="text-gray-700">While seamless within Salesforce, Nue.io's architecture may pose challenges for businesses that rely on other CRM, ERP, or finance tools.</p>
+                    </div>
+                    <div class="p-6 rounded-lg bg-red-50 border border-red-100 w-1/4 min-h-[300px] flex flex-col card-hover-effect">
+                        <h4 class="text-xl font-semibold mb-4 text-red-600">❌ Enterprise Adoption</h4>
+                        <p class="text-gray-700">Large organizations might resist migration due to entrenched processes. Strengthening migration tools and enablement programs needed.</p>
+                        </div>
+                    <div class="p-6 rounded-lg bg-red-50 border border-red-100 w-1/4 min-h-[300px] flex flex-col card-hover-effect">
+                        <h4 class="text-xl font-semibold mb-4 text-red-600">❌ Industry Expansion</h4>
+                        <p class="text-gray-700">Nue.io is highly optimized for SaaS and subscription businesses but might not yet fully support industries with different revenue models.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Expansion Strategy -->
+    <section id="customer-expansion" class="py-20 bg-gradient-light relative overflow-hidden">
+        <!-- Client Network Background Pattern -->
+        <div class="absolute inset-0 pointer-events-none opacity-[0.07] client-network">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="client-grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <circle cx="20" cy="20" r="1.5" fill="#7F56FD" class="client-node"/>
+                    </pattern>
+                    <linearGradient id="connection-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#7F56FD;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#3B9BFF;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#client-grid)" />
+                <!-- Additional connection lines -->
+                <path class="connection-line" d="M20,20 L60,60" stroke="url(#connection-gradient)" stroke-width="0.8"/>
+                <path class="connection-line" d="M60,20 L20,60" stroke="url(#connection-gradient)" stroke-width="0.8"/>
+                <path class="connection-line" d="M40,0 L40,80" stroke="url(#connection-gradient)" stroke-width="0.8"/>
+                <path class="connection-line" d="M0,40 L80,40" stroke="url(#connection-gradient)" stroke-width="0.8"/>
+                <path class="connection-line" d="M20,20 L60,20" stroke="url(#connection-gradient)" stroke-width="0.8"/>
+                <path class="connection-line" d="M20,60 L60,60" stroke="url(#connection-gradient)" stroke-width="0.8"/>
+            </svg>
+        </div>
+
+        <style>
+            @keyframes pulseNode {
+                0% { transform: scale(1); opacity: 0.5; }
+                50% { transform: scale(1.8); opacity: 1; }
+                100% { transform: scale(1); opacity: 0.5; }
+            }
+
+            @keyframes flowConnection {
+                0% { stroke-dashoffset: 100; opacity: 0.2; }
+                50% { opacity: 0.5; }
+                100% { stroke-dashoffset: 0; opacity: 0.2; }
+            }
+
+            .client-network {
+                animation: float 30s infinite linear;
+            }
+
+            .client-node {
+                animation: pulseNode 6s infinite ease-in-out;
+            }
+
+            .connection-line {
+                stroke-dasharray: 100;
+                animation: flowConnection 12s infinite linear;
+            }
+
+            @keyframes float {
+                0% { transform: translate(0, 0) rotate(0deg); }
+                50% { transform: translate(-30px, 30px) rotate(1deg); }
+                100% { transform: translate(0, 0) rotate(0deg); }
+            }
+        </style>
+
+        <div class="container mx-auto px-4">
+            <div class="flex items-center space-x-3 justify-center mb-16">
+                <span class="text-4xl">📌</span>
+                <h2 class="text-4xl font-bold text-center text-nue-dark">Customer Expansion Strategy</h2>
+                        </div>
+            
+            <!-- Strategy Overview -->
+            <div class="w-full mx-auto mb-16 section-fade">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex gap-8 justify-center">
+                        <!-- Main Slider Card - Base width -->
+                        <div class="w-[57%]">
+                            <div class="p-8 rounded-2xl bg-white shadow-lg border border-gray-100">
+                                <h3 class="text-2xl font-semibold mb-8 gradient-text text-center">Strategic Approach in 4 Steps</h3>
+                                
+                                <!-- Elegant Slider Card -->
+                                <div class="relative overflow-hidden rounded-xl bg-gradient-to-br from-white to-gray-50">
+                                    <!-- Slider Container -->
+                                    <div class="relative px-12">
+                                        <div class="overflow-hidden">
+                                            <div class="flex transition-transform duration-700 ease-in-out" id="strategic-slider">
+                                                <!-- Slide 1: Customer Needs -->
+                                                <div class="w-full flex-shrink-0 px-8 py-12">
+                                                    <div class="flex flex-col items-center text-center space-y-8">
+                                                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-gradient-light shadow-lg border border-purple-100">
+                                                            <span class="text-4xl">1️⃣</span>
+                        </div>
+                                                        <div class="space-y-6 max-w-lg mx-auto">
+                                                            <h4 class="text-xl font-semibold text-nue-purple">Understand the Customer's Needs & Pain Points</h4>
+                                                            <p class="text-nue-gray leading-relaxed">Cross-selling must be <span class="font-semibold">relevant</span> to the customer's existing use case. Analyze <span class="font-semibold">data</span> (past purchases, usage patterns, industry trends) to determine what they truly need.</p>
+                        </div>
+                    </div>
+                </div>
+
+                                                <!-- Slide 2: Natural Entry Point -->
+                                                <div class="w-full flex-shrink-0 px-8 py-12">
+                                                    <div class="flex flex-col items-center text-center space-y-8">
+                                                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-gradient-light shadow-lg border border-purple-100">
+                                                            <span class="text-4xl">2️⃣</span>
+                        </div>
+                                                        <div class="space-y-6 max-w-lg mx-auto">
+                                                            <h4 class="text-xl font-semibold text-nue-purple">Create a Natural Entry Point</h4>
+                                                            <div class="space-y-4">
+                                                                <p class="text-nue-gray leading-relaxed">🔹 Leverage Data-Driven Insights for a Proactive Conversation</p>
+                                                                <p class="text-nue-gray leading-relaxed">🔹 Position Nue as a Strategic Partner, Not Just a Vendor</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                                                <!-- Slide 3: Value-Add Position -->
+                                                <div class="w-full flex-shrink-0 px-8 py-12">
+                                                    <div class="flex flex-col items-center text-center space-y-8">
+                                                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-gradient-light shadow-lg border border-purple-100">
+                                                            <span class="text-4xl">3️⃣</span>
+                                                        </div>
+                                                        <div class="space-y-6 max-w-lg mx-auto">
+                                                            <h4 class="text-xl font-semibold text-nue-purple">Position Expansion as a Value-Add</h4>
+                                                            <div class="space-y-4">
+                                                                <p class="text-nue-gray leading-relaxed">❌ <span class="font-semibold">Bad Approach:</span> "You should buy Billing & Lifecycle Manager."</p>
+                                                                <p class="text-nue-gray leading-relaxed">✅ <span class="font-semibold">Better Approach:</span> "Many CPQ customers find that Billing eliminates manual errors and revenue leakage, while Lifecycle Manager maximizes renewals and upgrades."</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Slide 4: Timing & Journey -->
+                                                <div class="w-full flex-shrink-0 px-8 py-12">
+                                                    <div class="flex flex-col items-center text-center space-y-8">
+                                                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-gradient-light shadow-lg border border-purple-100">
+                                                            <span class="text-4xl">4️⃣</span>
+                                                        </div>
+                                                        <div class="space-y-6 max-w-lg mx-auto">
+                                                            <h4 class="text-xl font-semibold text-nue-purple">Leverage Timing & Customer Journey Stages</h4>
+                                                            <div class="space-y-4">
+                                                                <p class="text-nue-gray leading-relaxed">🔹 <span class="font-semibold">Post-Onboarding Success:</span> Once CPQ delivers value, introduce Billing & Lifecycle Manager.</p>
+                                                                <p class="text-nue-gray leading-relaxed">🔹 <span class="font-semibold">First Operational Success:</span> Revenue ops audit to show inefficiencies.</p>
+                                                                <p class="text-nue-gray leading-relaxed">🔹 <span class="font-semibold">Before Contract Renewal:</span> Offer bundled pricing & implementation discounts.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Slide 5: Bundling & Incentives -->
+                                                <div class="w-full flex-shrink-0 px-8 py-12">
+                                                    <div class="flex flex-col items-center text-center space-y-8">
+                                                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-gradient-light shadow-lg border border-purple-100">
+                                                            <span class="text-4xl">5️⃣</span>
+                                                        </div>
+                                                        <div class="space-y-6 max-w-lg mx-auto">
+                                                            <h4 class="text-xl font-semibold text-nue-purple">Bundling & Incentives</h4>
+                                                            <div class="space-y-4">
+                                                                <p class="text-nue-gray leading-relaxed">✔️ <span class="font-semibold">CPQ + Billing:</span> Discounted pricing for customers adopting both. 2 months free on 14 months.</p>
+                                                                <p class="text-nue-gray leading-relaxed">✔️ <span class="font-semibold">Pilot Pricing:</span> "Try Billing for 6 months before full rollout."</p>
+                                                                <p class="text-nue-gray leading-relaxed">✔️ <span class="font-semibold">Implementation Discounts:</span> "Customers bundling CPQ & Billing get implementation waived."</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Enhanced Navigation Dots -->
+                                    <div class="absolute bottom-4 left-0 right-0">
+                                        <div class="flex justify-center items-center gap-4">
+                                            <button class="w-3 h-3 rounded-full bg-nue-purple opacity-50 hover:opacity-100 transition-all duration-300 transform hover:scale-125 strategic-dot active" data-index="0"></button>
+                                            <button class="w-3 h-3 rounded-full bg-nue-purple opacity-50 hover:opacity-100 transition-all duration-300 transform hover:scale-125 strategic-dot" data-index="1"></button>
+                                            <button class="w-3 h-3 rounded-full bg-nue-purple opacity-50 hover:opacity-100 transition-all duration-300 transform hover:scale-125 strategic-dot" data-index="2"></button>
+                                            <button class="w-3 h-3 rounded-full bg-nue-purple opacity-50 hover:opacity-100 transition-all duration-300 transform hover:scale-125 strategic-dot" data-index="3"></button>
+                                            <button class="w-3 h-3 rounded-full bg-nue-purple opacity-50 hover:opacity-100 transition-all duration-300 transform hover:scale-125 strategic-dot" data-index="4"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Insights Card - 75% of main card width -->
+                        <div class="w-[43%]">
+                            <div class="p-8 rounded-2xl bg-white shadow-lg border border-gray-100 h-full">
+                                <h3 class="text-2xl font-semibold mb-8 gradient-text text-center">Strategic Insights</h3>
+                                
+                                <!-- Insights Content Container -->
+                                <div class="space-y-6" id="insights-content">
+                                    <!-- Customer Needs Insights -->
+                                    <div class="insights-slide active">
+                                        <div class="p-6 rounded-xl bg-gradient-light border border-purple-100">
+                                            <h4 class="text-xl font-semibold text-nue-purple mb-4">🔍 Current State Analysis</h4>
+                                            <div class="space-y-4">
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">✔️</span>
+                                                    <p class="text-nue-gray">Efficient quoting, but billing and revenue management gaps exist</p>
+                                                </div>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">✔️</span>
+                                                    <p class="text-nue-gray">Manual reconciliation between CPQ & invoicing creates revenue leakage</p>
+                                                </div>
+                                                <h4 class="text-lg font-semibold text-nue-purple mt-6 mb-3">🔍 Pain Points</h4>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">✔️</span>
+                                                    <p class="text-nue-gray">Billing teams struggle with manual invoice creation & pricing errors</p>
+                                                </div>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">✔️</span>
+                                                    <p class="text-nue-gray">Lost revenue from misaligned pricing and contract changes</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Natural Entry Point Insights -->
+                                    <div class="insights-slide hidden">
+                                        <div class="p-6 rounded-xl bg-gradient-light border border-purple-100">
+                                            <h4 class="text-xl font-semibold text-nue-purple mb-4">💡 Conversation Starters</h4>
+                                            <div class="space-y-4">
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">📊</span>
+                                                    <p class="text-nue-gray">"I noticed your team processes X invoices manually each month..."</p>
+                                                </div>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">💡</span>
+                                                    <p class="text-nue-gray">"How are you handling the reconciliation between quotes and billing?"</p>
+                                                </div>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">🎯</span>
+                                                    <p class="text-nue-gray">"What's your strategy for managing subscription changes and renewals?"</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Value-Add Position Insights -->
+                                    <div class="insights-slide hidden">
+                                        <div class="p-6 rounded-xl bg-gradient-light border border-purple-100">
+                                            <h4 class="text-xl font-semibold text-nue-purple mb-4">📌 Key Benefits</h4>
+                                            <div class="space-y-4">
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">✔️</span>
+                                                    <p class="text-nue-gray"><span class="font-semibold">Billing + CPQ:</span> Eliminates invoicing errors, ensuring faster cash flow</p>
+                                                </div>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">✔️</span>
+                                                    <p class="text-nue-gray"><span class="font-semibold">Lifecycle Manager:</span> Automates renewals, upsells, and contract adjustments</p>
+                                                </div>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">✔️</span>
+                                                    <p class="text-nue-gray"><span class="font-semibold">Full Suite = Revenue Control:</span> Unifies Sales, Finance, and RevOps operations</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Timing & Journey Insights -->
+                                    <div class="insights-slide hidden">
+                                        <div class="p-6 rounded-xl bg-gradient-light border border-purple-100">
+                                            <h4 class="text-xl font-semibold text-nue-purple mb-4">📊 System Intelligence</h4>
+                                            <div class="space-y-4">
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">📈</span>
+                                                    <p class="text-nue-gray">Automated alerts for high manual processing volumes</p>
+                                                </div>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">⚡</span>
+                                                    <p class="text-nue-gray">Revenue leakage detection through pattern analysis</p>
+                                                </div>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">🎯</span>
+                                                    <p class="text-nue-gray">Predictive renewal risk scoring</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bundling & Incentives Insights -->
+                                    <div class="insights-slide hidden">
+                                        <div class="p-6 rounded-xl bg-gradient-light border border-purple-100">
+                                            <h4 class="text-xl font-semibold text-nue-purple mb-4">💰 Success Metrics</h4>
+                                            <div class="space-y-4">
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">📊</span>
+                                                    <p class="text-nue-gray">85% of bundle customers achieve ROI within 6 months</p>
+                                                </div>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">🎯</span>
+                                                    <p class="text-nue-gray">92% pilot-to-purchase conversion rate</p>
+                                                </div>
+                                                <div class="flex items-start gap-3">
+                                                    <span class="text-nue-purple">💫</span>
+                                                    <p class="text-nue-gray">40% reduction in implementation time with bundled approach</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final Takeaway Card -->
+            <div class="w-full max-w-4xl mx-auto mt-16 section-fade">
+                <div class="bg-white rounded-2xl shadow-lg p-8">
+                    <div class="flex items-start gap-4">
+                        <span class="text-3xl">✅</span>
+                        <div>
+                            <h4 class="text-xl font-semibold text-nue-dark mb-4">Final Takeaway</h4>
+                            <p class="text-lg text-nue-gray leading-relaxed">
+                                The best way to expand a CPQ-only customer is to position Billing & Lifecycle Manager as an operational necessity rather than an extra product. By focusing on business impact, cost savings, and seamless integration, we ensure the customer sees the expansion as a natural next step in their revenue operations strategy.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Talent and Team Building -->
+    <section id="talent-building" class="py-20 bg-gradient-light relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <!-- Main Title -->
+            <div class="flex items-center space-x-3 justify-center mb-16">
+                <span class="text-4xl">👥</span>
+                <h2 class="text-4xl font-bold text-center text-nue-dark">Talent & Team Building Strategy</h2>
+            </div>
+
+            <!-- FIRST POINT: High-Performance Hiring Philosophy -->
+            <div class="w-full mx-auto mb-16 section-fade">
+                <h3 class="text-2xl font-semibold mb-6 gradient-text">High-Performance Hiring Philosophy</h3>
+                <div class="bg-white rounded-2xl shadow-lg p-10 transform hover:scale-[1.02] transition-all duration-300">
+                    <p class="text-nue-gray text-center mb-8">Hiring the right talent isn't just about skills or experience-it's about identifying individuals who consistently drive impact, adapt to change, and elevate those around them. Topgrading provides a framework for doing exactly that, offering deep insights into the competencies that define high-performing leaders.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">🎯</span>
+                                <p class="font-semibold text-nue-purple">1. Talent Level → Only Hiring Top 10%</p>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">⚡</span>
+                                <p class="font-semibold text-nue-purple">2. Problem Solving → Rapid Decision-Makers</p>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">🔄</span>
+                                <p class="font-semibold text-nue-purple">3. Leadership → Adaptability & Change-Makers</p>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">🔥</span>
+                                <p class="font-semibold text-nue-purple">4. Passion & Work Ethic → Only High-Energy, Mission-Driven People</p>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">💪</span>
+                                <p class="font-semibold text-nue-purple">5. Resourcefulness → "Can-Do" Mentality</p>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">⭐</span>
+                                <p class="font-semibold text-nue-purple">6. Topgrading → Only Hiring A-Players</p>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">🌟</span>
+                                <p class="font-semibold text-nue-purple">7. Coaching & Team Building → Leaders Who Elevate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECOND POINT: Hiring Strategy -->
+            <div class="w-full mx-auto mb-16 section-fade">
+                <h3 class="text-2xl font-semibold mb-6 gradient-text">Hiring Strategy</h3>
+                <div class="bg-white rounded-2xl shadow-lg p-10 transform hover:scale-[1.02] transition-all duration-300">
+                    <p class="text-nue-gray text-center mb-8">Finding and attracting the right talent requires a multi-faceted approach that leverages referrals, strategic partnerships, and a strong employer brand. These five strategies form the core of our talent acquisition plan.</p>
+                    
+                    <style>
+                        @keyframes subtlePulse {
+                            0% { transform: scale(1); }
+                            50% { transform: scale(1.05); }
+                            100% { transform: scale(1); }
+                        }
+                        
+                        .hiring-strategy-dot {
+                            transition: all 0.3s ease;
+                        }
+                        
+                        .hiring-strategy-dot.active {
+                            background: linear-gradient(135deg, #7F56FD 0%, #3B9BFF 100%);
+                            transform: scale(1.25);
+                        }
+                        
+                        .hiring-strategy-dot:hover {
+                            transform: scale(1.2);
+                        }
+                        
+                        .hiring-slider-progress {
+                            height: 3px;
+                            background: rgba(127, 86, 253, 0.1);
+                            border-radius: 1.5px;
+                            overflow: hidden;
+                            position: relative;
+                        }
+                        
+                        .hiring-slider-progress-bar {
+                            height: 100%;
+                            background: linear-gradient(90deg, #7F56FD 0%, #3B9BFF 100%);
+                            border-radius: 1.5px;
+                            transition: width 0.5s ease;
+                        }
+                    </style>
+                    
+                    <!-- Elegant Slider Container with no arrows -->
+                    <div class="relative overflow-hidden rounded-xl">
+                        <!-- Slider Container -->
+                        <div class="relative px-4">
+                            <div class="overflow-hidden">
+                                <div class="flex transition-transform duration-500 ease-in-out" id="hiring-strategy-slider">
+                                    
+                                    <!-- Strategy 1: Network-First Strategy -->
+                                    <div class="w-full flex-shrink-0 px-6 py-6">
+                                        <div class="bg-gradient-light rounded-xl p-8 border border-purple-100 hover:shadow-lg transition-all duration-300">
+                                            <div class="flex flex-col items-center text-center gap-6">
+                                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-light shadow-md border border-purple-100">
+                                                    <span class="text-3xl">🤝</span>
+                                                </div>
+                                                <h4 class="text-xl font-semibold text-nue-purple">1. Network-First & Referral-Heavy Strategy</h4>
+                                                <div class="space-y-4">
+                                                    <p class="text-nue-gray"><span class="font-semibold">Referral-First Hiring →</span> Incentivize referrals from network and existing team.</p>
+                                                    <p class="text-nue-gray"><span class="font-semibold">Top Talent Network →</span> My network includes top talent from Cobre, Raincoat, and other top startups.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Strategy 2: Multi-Channel Talent Sourcing -->
+                                    <div class="w-full flex-shrink-0 px-6 py-6">
+                                        <div class="bg-gradient-light rounded-xl p-8 border border-purple-100 hover:shadow-lg transition-all duration-300">
+                                            <div class="flex flex-col items-center text-center gap-6">
+                                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-light shadow-md border border-purple-100">
+                                                    <span class="text-3xl">🌐</span>
+                                                </div>
+                                                <h4 class="text-xl font-semibold text-nue-purple">2. Multi-Channel Talent Sourcing</h4>
+                                                <div class="space-y-4">
+                                                    <p class="text-nue-gray"><span class="font-semibold">Specialized Recruiters →</span> Partner with recruiters who specialize in RevOps, CPQ, and Saas solutions.</p>
+                                                    <p class="text-nue-gray"><span class="font-semibold">Employer Branding →</span> Leverage LinkedIn, startup communities, and thought leadership content.</p>
+                                                    <p class="text-nue-gray"><span class="font-semibold">Direct Outreach →</span> Actively sourcing talent from leading SaaS companies.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Strategy 3: PR & Thought Leadership -->
+                                    <div class="w-full flex-shrink-0 px-6 py-6">
+                                        <div class="bg-gradient-light rounded-xl p-8 border border-purple-100 hover:shadow-lg transition-all duration-300">
+                                            <div class="flex flex-col items-center text-center gap-6">
+                                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-light shadow-md border border-purple-100">
+                                                    <span class="text-3xl">📢</span>
+                                                </div>
+                                                <h4 class="text-xl font-semibold text-nue-purple">3. PR & Thought Leadership</h4>
+                                                <div class="space-y-4">
+                                                    <p class="text-nue-gray"><span class="font-semibold">Strategic PR Campaigns →</span> Position Nue.io's Bogota office as a high-performance hub for SaaS talent.</p>
+                                                    <p class="text-nue-gray"><span class="font-semibold">Industry Events →</span> Participate in SaaS, Fintech, and RevOps events to showcase culture and leadership.</p>
+                                                    <p class="text-nue-gray"><span class="font-semibold">Brand Marketing →</span> Highlight employee success stories and fast career growth opportunities.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Strategy 4: Structured Hiring Process -->
+                                    <div class="w-full flex-shrink-0 px-6 py-6">
+                                        <div class="bg-gradient-light rounded-xl p-8 border border-purple-100 hover:shadow-lg transition-all duration-300">
+                                            <div class="flex flex-col items-center text-center gap-6">
+                                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-light shadow-md border border-purple-100">
+                                                    <span class="text-3xl">📋</span>
+                                                </div>
+                                                <h4 class="text-xl font-semibold text-nue-purple">4. Structured Hiring & Screening Process</h4>
+                                                <div class="space-y-4">
+                                                    <p class="text-nue-gray"><span class="font-semibold">Role Scorecards →</span> Clear success metrics for every hire.</p>
+                                                    <p class="text-nue-gray"><span class="font-semibold">"Who" Interviewing →</span> Screen for grit, adaptability, and ownership.</p>
+                                                    <p class="text-nue-gray"><span class="font-semibold">Backdoor References →</span> Validate every hire through trusted industry contacts.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Strategy 5: Culture-First Recruitment -->
+                                    <div class="w-full flex-shrink-0 px-6 py-6">
+                                        <div class="bg-gradient-light rounded-xl p-8 border border-purple-100 hover:shadow-lg transition-all duration-300">
+                                            <div class="flex flex-col items-center text-center gap-6">
+                                                <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-light shadow-md border border-purple-100">
+                                                    <span class="text-3xl">🎯</span>
+                                                </div>
+                                                <h4 class="text-xl font-semibold text-nue-purple">5. Culture-First Recruitment</h4>
+                                                <div class="space-y-4">
+                                                    <p class="text-nue-gray"><span class="font-semibold">Top Performers Only →</span> "B-players hire C-players. A-players hire A+"</p>
+                                                    <p class="text-nue-gray"><span class="font-semibold">Customer-Centric Mindset →</span> CS is a company-wide responsibility.</p>
+                                                    <p class="text-nue-gray"><span class="font-semibold">Mission-Driven →</span> We attract people who want to build, solve, and grow</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Enhanced Progress Bar -->
+                        <div class="mt-6 mb-4 mx-auto w-1/2">
+                            <div class="hiring-slider-progress">
+                                <div class="hiring-slider-progress-bar" style="width: 20%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Navigation Dots -->
+                        <div class="mb-4">
+                            <div class="flex justify-center items-center gap-5">
+                                <button class="w-4 h-4 rounded-full bg-nue-purple/30 hiring-strategy-dot active" data-index="0"></button>
+                                <button class="w-4 h-4 rounded-full bg-nue-purple/30 hiring-strategy-dot" data-index="1"></button>
+                                <button class="w-4 h-4 rounded-full bg-nue-purple/30 hiring-strategy-dot" data-index="2"></button>
+                                <button class="w-4 h-4 rounded-full bg-nue-purple/30 hiring-strategy-dot" data-index="3"></button>
+                                <button class="w-4 h-4 rounded-full bg-nue-purple/30 hiring-strategy-dot" data-index="4"></button>
+                            </div>
+                        </div>
+                        
+                        <!-- Current Strategy Label (Subtle) -->
+                        <div class="text-center text-nue-gray text-sm mb-2" id="strategy-label">
+                            Strategy 1 of 5: Network-First & Referral-Heavy
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Initialize the slider functionality after the DOM is fully loaded
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Get all necessary elements
+                    const slider = document.getElementById('hiring-strategy-slider');
+                    const dots = document.querySelectorAll('.hiring-strategy-dot');
+                    const progressBar = document.querySelector('.hiring-slider-progress-bar');
+                    const strategyLabel = document.getElementById('strategy-label');
+                    let currentIndex = 0;
+                    const totalSlides = dots.length;
+                    let autoplayInterval;
+                    
+                    // Strategy labels
+                    const strategyLabels = [
+                        "Strategy 1 of 5: Network-First & Referral-Heavy",
+                        "Strategy 2 of 5: Multi-Channel Talent Sourcing",
+                        "Strategy 3 of 5: PR & Thought Leadership",
+                        "Strategy 4 of 5: Structured Hiring & Screening Process",
+                        "Strategy 5 of 5: Culture-First Recruitment"
+                    ];
+                    
+                    // Function to go to a specific slide
+                    function goToSlide(index) {
+                        if (index < 0) index = 0;
+                        if (index >= totalSlides) index = totalSlides - 1;
+                        
+                        currentIndex = index;
+                        
+                        // Update slider position
+                        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                        
+                        // Update active dot
+                        dots.forEach((dot, i) => {
+                            if (i === currentIndex) {
+                                dot.classList.add('active');
+                            } else {
+                                dot.classList.remove('active');
+                            }
+                        });
+                        
+                        // Update progress bar
+                        const progressPercentage = ((currentIndex + 1) / totalSlides) * 100;
+                        progressBar.style.width = `${progressPercentage}%`;
+                        
+                        // Update strategy label
+                        strategyLabel.textContent = strategyLabels[currentIndex];
+                    }
+                    
+                    // Add click event listeners to dots
+                    dots.forEach((dot, i) => {
+                        dot.addEventListener('click', () => {
+                            goToSlide(i);
+                            resetAutoplay();
+                        });
+                    });
+                    
+                    // Function to start autoplay
+                    function startAutoplay() {
+                        autoplayInterval = setInterval(() => {
+                            let nextIndex = currentIndex + 1;
+                            if (nextIndex >= totalSlides) nextIndex = 0;
+                            goToSlide(nextIndex);
+                        }, 5000); // Change slide every 5 seconds
+                    }
+                    
+                    // Function to reset autoplay
+                    function resetAutoplay() {
+                        clearInterval(autoplayInterval);
+                        startAutoplay();
+                    }
+                    
+                    // Pause autoplay on hover
+                    slider.parentNode.addEventListener('mouseenter', () => {
+                        clearInterval(autoplayInterval);
+                    });
+                    
+                    // Resume autoplay on mouse leave
+                    slider.parentNode.addEventListener('mouseleave', () => {
+                        startAutoplay();
+                    });
+                    
+                    // Start autoplay
+                    startAutoplay();
+                });
+            </script>
+
+            <!-- THIRD POINT: Role-Specific Hiring Considerations -->
+            <div class="w-full mx-auto mb-16 section-fade">
+                <h3 class="text-2xl font-semibold mb-6 gradient-text">Role-Specific Hiring Considerations</h3>
+                <div class="bg-white rounded-2xl shadow-lg p-10 transform hover:scale-[1.02] transition-all duration-300">
+                    <p class="text-nue-gray text-center mb-8">Each function—Implementation, Customer Success, and Growth—requires a tailored approach based on skill sets, mindset, and execution style. While startup experience is prioritized across the board, sourcing strategies will vary.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">⚙️</span>
+                                <h4 class="font-semibold text-nue-purple">Implementation Roles</h4>
+                                <p class="text-sm text-nue-gray">Require strong technical expertise in CPQ, RevOps, and SaaS integrations. Best sourced through technical recruiters, SaaS engineering networks, and direct outreach to ex-Salesforce/HubSpot talent.</p>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">🤝</span>
+                                <h4 class="font-semibold text-nue-purple">Customer Success & Account Management</h4>
+                                <p class="text-sm text-nue-gray">Need strategic, revenue-driven thinkers who proactively drive customer expansion. Prioritized via referrals from top Saas CSMs, fintech CS leaders, and high-growth startup ecosystems.</p>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">📈</span>
+                                <h4 class="font-semibold text-nue-purple">Growth Roles</h4>
+                                <p class="text-sm text-nue-gray">Demand resilient, data-driven sales professionals who thrive in outbound and consultative selling. Best sourced through SaaS sales networks, referrals, and outbound-focused hiring processes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOURTH POINT: Ensuring Long-Term Retention & Success -->
+            <div class="w-full mx-auto mb-16 section-fade">
+                <h3 class="text-2xl font-semibold mb-6 gradient-text">Ensuring Long-Term Retention & Success</h3>
+                <div class="bg-white rounded-2xl shadow-lg p-10 transform hover:scale-[1.02] transition-all duration-300">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">💰</span>
+                                <h4 class="font-semibold text-nue-purple">Competitive Compensation</h4>
+                                <p class="text-sm text-nue-gray">Above-market salaries to reduce poaching.</p>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">📈</span>
+                                <h4 class="font-semibold text-nue-purple">Career Progression</h4>
+                                <p class="text-sm text-nue-gray">Internal promotion paths to keep top talent engaged.</p>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-xl bg-gradient-light hover:shadow-lg transition-all duration-300">
+                            <div class="flex flex-col items-center text-center gap-4">
+                                <span class="text-3xl">🎓</span>
+                                <h4 class="font-semibold text-nue-purple">Onboarding Playbook</h4>
+                                <p class="text-sm text-nue-gray">HQ immersion, culture buddies, and milestone-based ramp-ups.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final Takeaway -->
+            <div class="w-full max-w-4xl mx-auto mt-16 section-fade">
+                <div class="bg-gradient-brand rounded-2xl p-10 text-white text-center transform hover:scale-[1.02] transition-all duration-300">
+                    <div class="flex items-center justify-center gap-4 mb-6">
+                        <span class="text-4xl">🌎</span>
+                        <h3 class="text-2xl font-bold">Final Takeaway</h3>
+                    </div>
+                    <p class="text-xl font-light">The Bogotá office will be a high-performance hub, fully integrated with Nue.io's global team</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Table of Contents Container -->
+    <div class="toc-container">
+        <!-- Floating Table of Contents Button -->
+        <button class="toc-button">
+            <span>Table of Contents</span>
+            <svg class="toc-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
+
+        <!-- Table of Contents Panel (Updated with correct links) -->
+        <div class="toc-content">
+            <ul>
+                <li>
+                    <a href="#product-assessment">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        Product Assessment
+                    </a>
+                </li>
+                <li class="ml-4">
+                    <a href="#core-problem">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        Core Problem Statement
+                    </a>
+                </li>
+                <li class="ml-4">
+                    <a href="#nue-solution">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Nue's Solution
+                    </a>
+                </li>
+                <li class="ml-4">
+                    <a href="#platform-strengths">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                        Platform Strengths
+                    </a>
+                </li>
+                <li class="ml-4">
+                    <a href="#product-weaknesses">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                        Product Weaknesses
+                    </a>
+                </li>
+                <li>
+                    <a href="#customer-expansion">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        Customer Expansion Strategy
+                    </a>
+                </li>
+                <li>
+                    <a href="#talent-building">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        Talent and Team Building
+                    </a>
+                </li>
+            </ul>
+            <div class="toc-footer">
+                <span>Table of Contents</span>
+                <svg class="toc-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adding a footer with LinkedIn info -->
+    <footer class="bg-nue-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white">
+                        <img src="camiloprofile.jpeg" alt="Camilo Hernandez" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col">
+                        <p class="font-semibold text-lg">Camilo Hernandez</p>
+                        <p class="text-gray-300 text-sm">Country Manager @ Raincoat</p>
+                    </div>
+                </div>
+                <div class="md:ml-8">
+                    <a href="https://www.linkedin.com/in/camilo-hernandez-viana-13975086/" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-3 bg-[#0A66C2] text-white px-4 py-2 rounded-full hover:opacity-90 transition-all duration-300 hover:gap-4">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        <span class="font-semibold">Connect on LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add current date to the hero section
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const currentDateElement = document.getElementById('current-date');
+        if (currentDateElement) {
+            currentDateElement.textContent = new Date().toLocaleDateString('en-US', options);
+        }
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section-fade').forEach((section) => {
+            observer.observe(section);
+        });
+
+        // Initialize Strategic Approach Slider
+        const strategicSlider = document.getElementById('strategic-slider');
+        const strategicDots = document.querySelectorAll('.strategic-dot');
+        let currentStrategicSlide = 0;
+        
+        function updateStrategicSlider(index) {
+            currentStrategicSlide = index;
+            
+            // Update dots
+            strategicDots.forEach((dot, idx) => {
+                if (idx === currentStrategicSlide) {
+                    dot.classList.add('active');
+                    dot.classList.remove('opacity-50');
+                    dot.classList.add('opacity-100');
+                } else {
+                    dot.classList.remove('active');
+                    dot.classList.add('opacity-50');
+                    dot.classList.remove('opacity-100');
+                }
+            });
+
+            // Move slider
+            if (strategicSlider) {
+                strategicSlider.style.transform = `translateX(-${currentStrategicSlide * 100}%)`;
+            }
+
+            // Update insights
+            document.querySelectorAll('.insights-slide').forEach((slide, idx) => {
+                if (idx === currentStrategicSlide) {
+                    slide.classList.remove('hidden');
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.add('hidden');
+                    slide.classList.remove('active');
+                }
+            });
+        }
+
+        // Handle dot clicks for strategic slider
+        strategicDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                updateStrategicSlider(index);
+            });
+        });
+
+        // Problem Slider functionality
+        const problemSlider = document.getElementById('slider-content');
+        const problemDots = document.querySelectorAll('.problem-dot');
+        let currentProblemSlide = 0;
+        
+        function updateProblemSlider(index) {
+            currentProblemSlide = index;
+            
+            // Update dots
+            problemDots.forEach((dot, idx) => {
+                if (idx === currentProblemSlide) {
+                    dot.classList.add('active');
+                    dot.classList.remove('opacity-50');
+                    dot.classList.add('opacity-100');
+                } else {
+                    dot.classList.remove('active');
+                    dot.classList.add('opacity-50');
+                    dot.classList.remove('opacity-100');
+                }
+            });
+
+            // Move slider
+            if (problemSlider) {
+                problemSlider.style.transform = `translateX(-${currentProblemSlide * 100}%)`;
+            }
+        }
+
+        // Handle dot clicks for problem slider
+        problemDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                updateProblemSlider(index);
+            });
+        });
+
+        // Auto-rotate sliders
+        setInterval(() => {
+            currentProblemSlide = (currentProblemSlide + 1) % problemDots.length;
+            updateProblemSlider(currentProblemSlide);
+        }, 7000);
+
+        setInterval(() => {
+            currentStrategicSlide = (currentStrategicSlide + 1) % strategicDots.length;
+            updateStrategicSlider(currentStrategicSlide);
+        }, 8000);
+
+        // Initialize Hiring Strategy Slider
+        const hiringSlider = document.getElementById('hiring-strategy-slider');
+        const hiringDots = document.querySelectorAll('.hiring-strategy-dot');
+        const hiringProgressBar = document.querySelector('.hiring-slider-progress-bar');
+        const strategyLabel = document.getElementById('strategy-label');
+        let currentHiringSlide = 0;
+        
+        const strategyLabels = [
+            "Strategy 1 of 5: Network-First & Referral-Heavy",
+            "Strategy 2 of 5: Multi-Channel Talent Sourcing",
+            "Strategy 3 of 5: PR & Thought Leadership",
+            "Strategy 4 of 5: Structured Hiring & Screening Process",
+            "Strategy 5 of 5: Culture-First Recruitment"
+        ];
+        
+        function updateHiringSlider(index) {
+            if (!hiringSlider) return;
+            
+            currentHiringSlide = index;
+            
+            // Update dots
+            hiringDots.forEach((dot, idx) => {
+                if (idx === currentHiringSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+            
+            // Update progress bar
+            if (hiringProgressBar) {
+                const progressPercent = ((currentHiringSlide + 1) / hiringDots.length) * 100;
+                hiringProgressBar.style.width = `${progressPercent}%`;
+            }
+            
+            // Update strategy label
+            if (strategyLabel) {
+                strategyLabel.textContent = strategyLabels[currentHiringSlide];
+            }
+            
+            // Move slider
+            hiringSlider.style.transform = `translateX(-${currentHiringSlide * 100}%)`;
+        }
+        
+        // Handle dot clicks for hiring slider
+        hiringDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                updateHiringSlider(index);
+            });
+        });
+        
+        // Auto-rotate hiring slider
+        let hiringInterval = setInterval(() => {
+            currentHiringSlide = (currentHiringSlide + 1) % hiringDots.length;
+            updateHiringSlider(currentHiringSlide);
+        }, 6000);
+        
+        // Pause rotation on hover
+        if (hiringSlider) {
+            hiringSlider.parentElement.addEventListener('mouseenter', () => {
+                clearInterval(hiringInterval);
+            });
+            
+            // Resume rotation when mouse leaves
+            hiringSlider.parentElement.addEventListener('mouseleave', () => {
+                hiringInterval = setInterval(() => {
+                    currentHiringSlide = (currentHiringSlide + 1) % hiringDots.length;
+                    updateHiringSlider(currentHiringSlide);
+                }, 6000);
+            });
+        }
+        
+        // Smooth scroll for ToC links
+        document.querySelectorAll('.toc-content a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        console.log('All scripts initialized successfully');
+    });
+</script>
+</html> 
