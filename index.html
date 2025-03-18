@@ -1251,7 +1251,6 @@
                     const strategyLabel = document.getElementById('strategy-label');
                     let currentIndex = 0;
                     const totalSlides = dots.length;
-                    let autoplayInterval;
                     
                     // Strategy labels
                     const strategyLabels = [
@@ -1293,37 +1292,8 @@
                     dots.forEach((dot, i) => {
                         dot.addEventListener('click', () => {
                             goToSlide(i);
-                            resetAutoplay();
                         });
                     });
-                    
-                    // Function to start autoplay
-                    function startAutoplay() {
-                        autoplayInterval = setInterval(() => {
-                            let nextIndex = currentIndex + 1;
-                            if (nextIndex >= totalSlides) nextIndex = 0;
-                            goToSlide(nextIndex);
-                        }, 5000); // Change slide every 5 seconds
-                    }
-                    
-                    // Function to reset autoplay
-                    function resetAutoplay() {
-                        clearInterval(autoplayInterval);
-                        startAutoplay();
-                    }
-                    
-                    // Pause autoplay on hover
-                    slider.parentNode.addEventListener('mouseenter', () => {
-                        clearInterval(autoplayInterval);
-                    });
-                    
-                    // Resume autoplay on mouse leave
-                    slider.parentNode.addEventListener('mouseleave', () => {
-                        startAutoplay();
-                    });
-                    
-                    // Start autoplay
-                    startAutoplay();
                 });
             </script>
 
@@ -1607,17 +1577,6 @@
             });
         });
 
-        // Auto-rotate sliders
-        setInterval(() => {
-            currentProblemSlide = (currentProblemSlide + 1) % problemDots.length;
-            updateProblemSlider(currentProblemSlide);
-        }, 7000);
-
-        setInterval(() => {
-            currentStrategicSlide = (currentStrategicSlide + 1) % strategicDots.length;
-            updateStrategicSlider(currentStrategicSlide);
-        }, 8000);
-
         // Initialize Hiring Strategy Slider
         const hiringSlider = document.getElementById('hiring-strategy-slider');
         const hiringDots = document.querySelectorAll('.hiring-strategy-dot');
@@ -1669,27 +1628,6 @@
             });
         });
         
-        // Auto-rotate hiring slider
-        let hiringInterval = setInterval(() => {
-            currentHiringSlide = (currentHiringSlide + 1) % hiringDots.length;
-            updateHiringSlider(currentHiringSlide);
-        }, 6000);
-        
-        // Pause rotation on hover
-        if (hiringSlider) {
-            hiringSlider.parentElement.addEventListener('mouseenter', () => {
-                clearInterval(hiringInterval);
-            });
-            
-            // Resume rotation when mouse leaves
-            hiringSlider.parentElement.addEventListener('mouseleave', () => {
-                hiringInterval = setInterval(() => {
-                    currentHiringSlide = (currentHiringSlide + 1) % hiringDots.length;
-                    updateHiringSlider(currentHiringSlide);
-                }, 6000);
-            });
-        }
-        
         // Smooth scroll for ToC links
         document.querySelectorAll('.toc-content a').forEach(link => {
             link.addEventListener('click', (e) => {
@@ -1705,7 +1643,7 @@
             });
         });
 
-        console.log('All scripts initialized successfully');
+        console.log('All scripts initialized successfully - Autoplay disabled per request');
     });
 </script>
 </html> 
